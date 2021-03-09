@@ -14,7 +14,9 @@
     "lint": "eslint .",
     "build:umd": "babel lib --extensions .ts --out-dir dist/umd --presets @babel/preset-typescript --plugins @babel/plugin-transform-modules-umd",
     "build:es": "babel lib --extensions .ts --out-dir dist/es --presets @babel/preset-typescript",
-    "test": "tsc && mocha dist/test"
+    "build": "npm run build:umd && npm run build:es",
+    "test": "tsc && mocha dist/test",
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
