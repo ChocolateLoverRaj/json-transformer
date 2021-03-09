@@ -12,8 +12,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build:umd": "babel lib --extensions .ts --out-dir dist/umd --presets @babel/preset-typescript --plugins @babel/plugin-transform-modules-umd",
-    "build:es": "babel lib --extensions .ts --out-dir dist/es --presets @babel/preset-typescript",
+    "build:umd": "tsc --project tsconfig/umd",
+    "build:es": "tsc --project tsconfig/es",
     "build": "npm run build:umd && npm run build:es",
     "test": "tsc && mocha dist/test",
     "prepack": "npm run build"
@@ -33,10 +33,6 @@
   },
   "homepage": "https://github.com/chocolateloverraj/json-transformer#readme",
   "devDependencies": {
-    "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10",
-    "@babel/plugin-transform-modules-umd": "^7.13.0",
-    "@babel/preset-typescript": "^7.13.0",
     "@types/mocha": "^8.2.1",
     "@types/node": "^14.14.32",
     "@types/object.fromentries": "^2.0.0",
