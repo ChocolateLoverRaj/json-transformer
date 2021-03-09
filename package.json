@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "Modify json values with plugins.",
   "main": "dist/umd/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/umd/index.js"
+    },
+    "./": "./"
+  },
   "scripts": {
     "lint": "eslint .",
     "build:umd": "babel lib --extensions .ts --out-dir dist/umd --presets @babel/preset-typescript --plugins @babel/plugin-transform-modules-umd",
