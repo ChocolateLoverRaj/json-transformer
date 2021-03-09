@@ -1,4 +1,4 @@
-import transform from '../lib/index'
+import { transform } from '../lib/index'
 import { spy } from 'sinon'
 import { deepStrictEqual, strictEqual } from 'assert'
 
