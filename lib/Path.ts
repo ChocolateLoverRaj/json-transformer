@@ -1,4 +1,6 @@
-class Path<Node> {
+import { Node } from './node'
+
+class Path {
   node: Node
 
   constructor (node: Node) {

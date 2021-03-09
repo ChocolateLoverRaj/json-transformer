@@ -1,4 +1,4 @@
-import { transform } from '../lib/index'
+import traverse from '../lib/traverse'
 import { spy } from 'sinon'
 import { deepStrictEqual, strictEqual } from 'assert'
 
@@ -6,7 +6,10 @@ it('Simple enter and exit', () => {
   const enterSpy = spy()
   const exitSpy = spy()
 
-  transform('a', [{
+  traverse({
+    type: 'String',
+    value: 'a'
+  }, [{
     String: {
       enter: enterSpy,
       exit: exitSpy
@@ -30,7 +33,13 @@ it('Array enter and exit', () => {
   const numberEnterSpy = spy()
   const numberExitSpy = spy()
 
-  transform([1], [{
+  traverse({
+    type: 'Array',
+    elements: [{
+      type: 'Number',
+      value: 1
+    }]
+  }, [{
     Array: {
       enter: arrayEnterSpy,
       exit: arrayExitSpy
@@ -58,7 +67,17 @@ it('Object enter and exit', () => {
   const booleanEnterSpy = spy()
   const booleanExitSpy = spy()
 
-  transform({ a: true }, [{
+  traverse({
+    type: 'Object',
+    entries: [{
+      type: 'ObjectEntry',
+      key: 'a',
+      value: {
+        type: 'Boolean',
+        value: true
+      }
+    }]
+  }, [{
     Object: {
       enter: objectEnterSpy,
       exit: objectExitSpy

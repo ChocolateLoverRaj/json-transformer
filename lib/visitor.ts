@@ -1,13 +1,13 @@
 import { NodeType } from './node'
 import Path from './Path'
 
-export type VisitorEnter<Node> = (path: Path<Node>) => void
+export type VisitorEnter = (path: Path) => void
 
-export interface NodeVisitor<Node> {
-  enter?: VisitorEnter<Node>
-  exit?: VisitorEnter<Node>
+export interface NodeVisitor {
+  enter?: VisitorEnter
+  exit?: VisitorEnter
 }
 
 export type Visitor = {
-  [Node in NodeType]?: NodeVisitor<Node>
+  [T in NodeType]?: NodeVisitor
 }

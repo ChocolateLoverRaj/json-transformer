@@ -3,6 +3,9 @@
     "module": "UMD",
     "outDir": "./dist",
     "strictNullChecks": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "lib": [
+      "ES2020"
+    ]
   }
 }
