@@ -1,5 +1,6 @@
 import { Json } from './json'
 import { Node } from './node'
+import fromEntries from 'object.fromentries'
 
 const generate = (node: Node): Json => {
   switch (node.type) {
@@ -14,7 +15,7 @@ const generate = (node: Node): Json => {
     case 'Array':
       return node.elements.map(node => generate(node))
     case 'Object':
-      return Object.fromEntries(node.entries.map(node => generate(node)) as Array<[string, Json]>)
+      return fromEntries(node.entries.map(node => generate(node)) as Array<[string, Json]>)
     case 'ObjectEntry':
       return [node.key, generate(node.value)]
   }
