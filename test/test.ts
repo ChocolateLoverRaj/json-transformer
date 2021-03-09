@@ -49,3 +49,39 @@ it('Array enter and exit', () => {
   strictEqual(arrayExitSpy.calledImmediatelyAfter(numberExitSpy), true)
   strictEqual(arrayExitSpy.calledOnce, true)
 })
+
+it('Object enter and exit', () => {
+  const objectEnterSpy = spy()
+  const objectExitSpy = spy()
+  const objectEntryEnterSpy = spy()
+  const objectEntryExitSpy = spy()
+  const booleanEnterSpy = spy()
+  const booleanExitSpy = spy()
+
+  transform({ a: true }, [{
+    Object: {
+      enter: objectEnterSpy,
+      exit: objectExitSpy
+    },
+    ObjectEntry: {
+      enter: objectEntryEnterSpy,
+      exit: objectEntryExitSpy
+    },
+    Boolean: {
+      enter: booleanEnterSpy,
+      exit: booleanExitSpy
+    }
+  }])
+
+  strictEqual(objectEnterSpy.calledOnce, true)
+  strictEqual(objectEntryEnterSpy.calledImmediatelyAfter(objectEnterSpy), true)
+  strictEqual(objectEntryEnterSpy.calledOnce, true)
+  strictEqual(booleanEnterSpy.calledImmediatelyAfter(objectEntryEnterSpy), true)
+  strictEqual(booleanEnterSpy.calledOnce, true)
+  strictEqual(booleanExitSpy.calledImmediatelyAfter(booleanEnterSpy), true)
+  strictEqual(booleanExitSpy.calledOnce, true)
+  strictEqual(objectEntryExitSpy.calledImmediatelyAfter(booleanExitSpy), true)
+  strictEqual(objectEntryExitSpy.calledOnce, true)
+  strictEqual(objectExitSpy.calledImmediatelyAfter(objectEntryExitSpy), true)
+  strictEqual(objectExitSpy.calledOnce, true)
+})
