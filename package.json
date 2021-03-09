@@ -2,11 +2,12 @@
   "name": "json-transformer",
   "version": "1.0.0",
   "description": "Modify json values with plugins.",
-  "main": "dist/lib/index.js",
+  "main": "dist/umd/index.js",
   "scripts": {
     "lint": "eslint .",
-    "build": "tsc",
-    "test": "mocha dist/test"
+    "build:umd": "babel lib --extensions .ts --out-dir dist/umd --presets @babel/preset-typescript --plugins @babel/plugin-transform-modules-umd",
+    "build:es": "babel lib --extensions .ts --out-dir dist/es --presets @babel/preset-typescript",
+    "test": "tsc && mocha dist/test"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,13 @@
   },
   "homepage": "https://github.com/chocolateloverraj/json-transformer#readme",
   "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-modules-umd": "^7.13.0",
+    "@babel/preset-typescript": "^7.13.0",
     "@types/mocha": "^8.2.1",
     "@types/node": "^14.14.32",
     "@types/sinon": "^9.0.11",
-    "babel-cli": "^6.26.0",
     "eslint": "^7.21.0",
     "mocha": "^8.3.1",
     "sinon": "^9.2.4",
