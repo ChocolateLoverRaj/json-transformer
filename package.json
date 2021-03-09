@@ -45,5 +45,9 @@
   },
   "dependencies": {
     "object.fromentries": "^2.0.4"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   }
 }
