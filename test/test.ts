@@ -1,6 +1,51 @@
-import value from '../lib/index'
-import { strictEqual } from 'assert'
+import transform from '../lib/index'
+import { spy } from 'sinon'
+import { deepStrictEqual, strictEqual } from 'assert'
 
-it('sample test', () => {
-  strictEqual(value, 3)
+it('Simple enter and exit', () => {
+  const enterSpy = spy()
+  const exitSpy = spy()
+
+  transform('a', [{
+    String: {
+      enter: enterSpy,
+      exit: exitSpy
+    }
+  }])
+
+  const expectedNode = {
+    type: 'String',
+    value: 'a'
+  }
+  strictEqual(enterSpy.calledOnce, true, 'Enter called once')
+  deepStrictEqual(enterSpy.firstCall.firstArg.node, expectedNode, 'Enter called with expected node')
+  strictEqual(exitSpy.calledImmediatelyAfter(enterSpy), true, 'Exit called right after enter spy')
+  strictEqual(enterSpy.calledOnce, true, 'Exit called once')
+  deepStrictEqual(exitSpy.firstCall.firstArg.node, expectedNode, 'Exit called with expected args')
+})
+
+it('Array enter and exit', () => {
+  const arrayEnterSpy = spy()
+  const arrayExitSpy = spy()
+  const numberEnterSpy = spy()
+  const numberExitSpy = spy()
+
+  transform([1], [{
+    Array: {
+      enter: arrayEnterSpy,
+      exit: arrayExitSpy
+    },
+    Number: {
+      enter: numberEnterSpy,
+      exit: numberExitSpy
+    }
+  }])
+
+  strictEqual(arrayEnterSpy.calledOnce, true)
+  strictEqual(numberEnterSpy.calledImmediatelyAfter(arrayEnterSpy), true)
+  strictEqual(numberEnterSpy.calledOnce, true)
+  strictEqual(numberExitSpy.calledImmediatelyAfter(numberEnterSpy), true)
+  strictEqual(numberExitSpy.calledOnce, true)
+  strictEqual(arrayExitSpy.calledImmediatelyAfter(numberExitSpy), true)
+  strictEqual(arrayExitSpy.calledOnce, true)
 })
