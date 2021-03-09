@@ -1,3 +1,7 @@
+[![Test](https://github.com/ChocolateLoverRaj/json-transformer/actions/workflows/test.yml/badge.svg)](https://github.com/ChocolateLoverRaj/json-transformer/actions/workflows/test.yml)
+[![License](https://badgen.net/github/license/standard/ts-standard)](https://github.com/standard/ts-standard/blob/master/LICENSE)
+[![TS-Standard - Typescript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard)
+
 # json-transformer
 Modify json values with plugins.
 
@@ -18,3 +22,6 @@ transform(3, [{
   }
 }]) // Returns 4
 ```
+
+## Contribute
+[![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/eslint-config-standard-with-typescript)
