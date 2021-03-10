@@ -1,4 +1,4 @@
-import { strictEqual } from 'assert'
+import { strictEqual, deepStrictEqual } from 'assert'
 import { transform } from '../lib'
 
 // Simple visitor
@@ -10,4 +10,14 @@ it('Simple visitor', () => {
       }
     }
   }]), 4)
+})
+
+it('Path.prototype.remove()', () => {
+  deepStrictEqual(transform(['a', 2, true], [{
+    String: {
+      enter: path => {
+        path.remove()
+      }
+    }
+  }]), [2, true])
 })
