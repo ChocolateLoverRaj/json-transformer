@@ -34,3 +34,13 @@ it('Replace node', () => {
     }
   }]), [false])
 })
+
+it('Replace object value', () => {
+  deepStrictEqual(transform({ a: 1 }, [{
+    Number: {
+      enter: path => {
+        path.replace({ type: 'Null' })
+      }
+    }
+  }]), { a: null })
+})
