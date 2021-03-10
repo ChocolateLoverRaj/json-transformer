@@ -35,6 +35,9 @@ class Path {
       case 'Object':
         this.node.entries[this.node.entries.indexOf(currentChild as ObjectEntryNode)] = newChild as ObjectEntryNode
         break
+      case 'ObjectEntry':
+        this.node.value = newChild
+        break
       default:
         throw new Error(`Cannot remove child from node type: ${this.node.type}`)
     }
