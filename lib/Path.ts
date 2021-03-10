@@ -36,7 +36,7 @@ class Path {
         this.node.entries[this.node.entries.indexOf(currentChild as ObjectEntryNode)] = newChild as ObjectEntryNode
         break
       default:
-        throw new Error(`Cannot replace child for node type: ${this.node.type}`)
+        throw new Error(`Cannot remove child from node type: ${this.node.type}`)
     }
   }
 

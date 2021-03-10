@@ -26,10 +26,10 @@ it('Replace node', () => {
   deepStrictEqual(transform([true], [{
     Boolean: {
       enter: path => {
-        path.node = {
+        path.replace({
           type: 'Boolean',
           value: false
-        }
+        })
       }
     }
   }]), [false])
