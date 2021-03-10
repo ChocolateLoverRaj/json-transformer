@@ -1,6 +1,8 @@
 import traverse from '../lib/traverse'
 import { spy } from 'sinon'
 import { deepStrictEqual, strictEqual } from 'assert'
+import { Node, StringNode } from '../lib/node'
+import { VisitorEnter } from '../lib/visitor'
 
 it('Simple enter and exit', () => {
   const enterSpy = spy()
@@ -103,4 +105,41 @@ it('Object enter and exit', () => {
   strictEqual(objectEntryExitSpy.calledOnce, true)
   strictEqual(objectExitSpy.calledImmediatelyAfter(objectEntryExitSpy), true)
   strictEqual(objectExitSpy.calledOnce, true)
+})
+
+it('Replace node', () => {
+  const stringEnterSpy = spy<VisitorEnter>(path => {
+    path.node = {
+      type: 'Number',
+      value: parseInt((path.node as StringNode).value)
+    }
+  })
+  const stringExitSpy = spy()
+  const numberEnterSpy = spy()
+  const numberExitSpy = spy()
+
+  const transformedNode = traverse({
+    type: 'String',
+    value: '2'
+  }, [{
+    String: {
+      enter: stringEnterSpy,
+      exit: stringExitSpy
+    },
+    Number: {
+      enter: numberEnterSpy,
+      exit: numberExitSpy
+    }
+  }])
+
+  strictEqual(stringEnterSpy.calledOnce, true)
+  strictEqual(numberExitSpy.calledImmediatelyAfter(stringEnterSpy), true)
+  strictEqual(numberExitSpy.calledOnce, true)
+  strictEqual(stringExitSpy.notCalled, true)
+  strictEqual(numberEnterSpy.notCalled, true)
+
+  deepStrictEqual<Node>(transformedNode, {
+    type: 'Number',
+    value: 2
+  })
 })

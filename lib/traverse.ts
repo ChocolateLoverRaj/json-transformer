@@ -2,35 +2,37 @@ import { Node } from './node'
 import Path from './Path'
 import { Visitor } from './visitor'
 
-const traverse = (node: Node, visitors: Visitor[], parentPath?: Path): void => {
+const traverse = (node: Node, visitors: Visitor[], parentPath?: Path): Node => {
   // Create a path
   const path = new Path(node, parentPath)
 
   // Entering node
   visitors.forEach(visitor => {
-    visitor[node.type]?.enter?.(path)
+    visitor[path.node.type]?.enter?.(path)
   })
 
   // Possible sub nodes
-  switch (node.type) {
+  switch (path.node.type) {
     case 'Array':
-      node.elements.forEach(node => {
+      path.node.elements.forEach(node => {
         traverse(node, visitors, path)
       })
       break
     case 'Object':
-      node.entries.forEach(node => {
+      path.node.entries.forEach(node => {
         traverse(node, visitors, path)
       })
       break
     case 'ObjectEntry':
-      traverse(node.value, visitors, path)
+      traverse(path.node.value, visitors, path)
   }
 
   // Exiting node
   visitors.forEach(visitor => {
-    visitor[node.type]?.exit?.(path)
+    visitor[path.node.type]?.exit?.(path)
   })
+
+  return path.node
 }
 
 export default traverse
