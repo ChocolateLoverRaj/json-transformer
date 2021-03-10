@@ -21,3 +21,16 @@ it('Path.prototype.remove()', () => {
     }
   }]), [2, true])
 })
+
+it('Replace node', () => {
+  deepStrictEqual(transform([true], [{
+    Boolean: {
+      enter: path => {
+        path.replace({
+          type: 'Boolean',
+          value: false
+        })
+      }
+    }
+  }]), [false])
+})

@@ -130,7 +130,7 @@ it('Replace node', () => {
       enter: numberEnterSpy,
       exit: numberExitSpy
     }
-  }])
+  }]).node
 
   strictEqual(stringEnterSpy.calledOnce, true)
   strictEqual(numberExitSpy.calledImmediatelyAfter(stringEnterSpy), true)

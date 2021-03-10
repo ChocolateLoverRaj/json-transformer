@@ -6,7 +6,7 @@ import { Visitor } from './visitor'
 
 const transform = (json: Json, visitors: Visitor[]): Json => {
   const ast = parser(json)
-  const transformedAst = traverse(ast, visitors)
+  const transformedAst = traverse(ast, visitors).node
   return generate(transformedAst)
 }
 

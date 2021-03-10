@@ -2,7 +2,7 @@ import { Node } from './node'
 import Path from './Path'
 import { Visitor } from './visitor'
 
-const traverse = (node: Node, visitors: Visitor[], parentPath?: Path): Node => {
+const traverse = (node: Node, visitors: Visitor[], parentPath?: Path): Path => {
   // Create a path
   const path = new Path(node, parentPath)
 
@@ -32,7 +32,7 @@ const traverse = (node: Node, visitors: Visitor[], parentPath?: Path): Node => {
     visitor[path.node.type]?.exit?.(path)
   })
 
-  return path.node
+  return path
 }
 
 export default traverse
