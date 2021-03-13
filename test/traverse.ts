@@ -143,3 +143,35 @@ it('Replace node', () => {
     value: 2
   })
 })
+
+it('Skip children', () => {
+  const arrayEnterSpy = spy<VisitorEnter>(path => {
+    path.skipChildren = true
+  })
+  const arrayExitSpy = spy()
+  const numberEnterSpy = spy()
+  const numberExitSpy = spy()
+
+  traverse({
+    type: 'Array',
+    elements: [{
+      type: 'Number',
+      value: 3
+    }]
+  }, {
+    Array: {
+      enter: arrayEnterSpy,
+      exit: arrayExitSpy
+    },
+    Number: {
+      enter: numberEnterSpy,
+      exit: numberExitSpy
+    }
+  })
+
+  strictEqual(arrayEnterSpy.calledOnce, true)
+  strictEqual(arrayExitSpy.calledImmediatelyAfter(arrayEnterSpy), true)
+  strictEqual(arrayExitSpy.calledOnce, true)
+  strictEqual(numberEnterSpy.notCalled, true)
+  strictEqual(numberExitSpy.notCalled, true)
+})

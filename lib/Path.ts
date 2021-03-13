@@ -4,6 +4,7 @@ import never from 'never'
 class Path {
   node: Node
   parentPath?: Path
+  skipChildren = false
 
   constructor (node: Node, parentPath?: Path) {
     this.node = node
