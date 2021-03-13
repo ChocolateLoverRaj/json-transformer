@@ -1,5 +1,5 @@
 [![Test](https://github.com/ChocolateLoverRaj/json-transformer/actions/workflows/test.yml/badge.svg)](https://github.com/ChocolateLoverRaj/json-transformer/actions/workflows/test.yml)
-[![License](https://badgen.net/github/license/standard/ts-standard)](https://github.com/standard/ts-standard/blob/master/LICENSE)
+[![License](https://badgen.net/github/license/standard/ts-standard)](https://github.com/ChocolateLoverRaj/json-transformer/blob/main/LICENSE)
 [![TS-Standard - Typescript Standard Style Guide](https://badgen.net/badge/code%20style/ts-standard/blue?icon=typescript)](https://github.com/standard/ts-standard)
 
 # json-transformer
