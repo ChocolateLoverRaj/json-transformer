@@ -9,20 +9,22 @@ const traverse = (node: Node, visitor: Visitor, parentPath?: Path): Path => {
   // Entering node
   visitor[path.node.type]?.enter?.(path)
 
-  // Possible sub nodes
-  switch (path.node.type) {
-    case 'Array':
-      path.node.elements.forEach(node => {
-        traverse(node, visitor, path)
-      })
-      break
-    case 'Object':
-      path.node.entries.forEach(node => {
-        traverse(node, visitor, path)
-      })
-      break
-    case 'ObjectEntry':
-      traverse(path.node.value, visitor, path)
+  if (!path.skipChildren) {
+    // Possible sub nodes
+    switch (path.node.type) {
+      case 'Array':
+        path.node.elements.forEach(node => {
+          traverse(node, visitor, path)
+        })
+        break
+      case 'Object':
+        path.node.entries.forEach(node => {
+          traverse(node, visitor, path)
+        })
+        break
+      case 'ObjectEntry':
+        traverse(path.node.value, visitor, path)
+    }
   }
 
   // Exiting node

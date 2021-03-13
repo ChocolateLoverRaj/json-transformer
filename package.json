@@ -15,7 +15,8 @@
     "build:umd": "tsc --project tsconfig/umd",
     "build:es": "tsc --project tsconfig/es",
     "build": "npm run build:umd && npm run build:es",
-    "test": "tsc && mocha dist/test",
+    "build:dev": "tsc",
+    "test": "mocha dist/test",
     "prepack": "npm run build"
   },
   "repository": {
