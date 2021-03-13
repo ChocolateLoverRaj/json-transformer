@@ -11,12 +11,12 @@ it('Simple enter and exit', () => {
   traverse({
     type: 'String',
     value: 'a'
-  }, [{
+  }, {
     String: {
       enter: enterSpy,
       exit: exitSpy
     }
-  }])
+  })
 
   const expectedNode = {
     type: 'String',
@@ -41,7 +41,7 @@ it('Array enter and exit', () => {
       type: 'Number',
       value: 1
     }]
-  }, [{
+  }, {
     Array: {
       enter: arrayEnterSpy,
       exit: arrayExitSpy
@@ -50,7 +50,7 @@ it('Array enter and exit', () => {
       enter: numberEnterSpy,
       exit: numberExitSpy
     }
-  }])
+  })
 
   strictEqual(arrayEnterSpy.calledOnce, true)
   strictEqual(numberEnterSpy.calledImmediatelyAfter(arrayEnterSpy), true)
@@ -79,7 +79,7 @@ it('Object enter and exit', () => {
         value: true
       }
     }]
-  }, [{
+  }, {
     Object: {
       enter: objectEnterSpy,
       exit: objectExitSpy
@@ -92,7 +92,7 @@ it('Object enter and exit', () => {
       enter: booleanEnterSpy,
       exit: booleanExitSpy
     }
-  }])
+  })
 
   strictEqual(objectEnterSpy.calledOnce, true)
   strictEqual(objectEntryEnterSpy.calledImmediatelyAfter(objectEnterSpy), true)
@@ -121,7 +121,7 @@ it('Replace node', () => {
   const transformedNode = traverse({
     type: 'String',
     value: '2'
-  }, [{
+  }, {
     String: {
       enter: stringEnterSpy,
       exit: stringExitSpy
@@ -130,7 +130,7 @@ it('Replace node', () => {
       enter: numberEnterSpy,
       exit: numberExitSpy
     }
-  }]).node
+  }).node
 
   strictEqual(stringEnterSpy.calledOnce, true)
   strictEqual(numberExitSpy.calledImmediatelyAfter(stringEnterSpy), true)

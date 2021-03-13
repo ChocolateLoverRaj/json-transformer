@@ -5,9 +5,11 @@ import traverse from './traverse'
 import { Visitor } from './visitor'
 
 const transform = (json: Json, visitors: Visitor[]): Json => {
-  const ast = parser(json)
-  const transformedAst = traverse(ast, visitors).node
-  return generate(transformedAst)
+  let ast = parser(json)
+  visitors.forEach(visitor => {
+    ast = traverse(ast, visitor).node
+  })
+  return generate(ast)
 }
 
 export default transform
